@@ -14,8 +14,15 @@
 # define LEM_IN_H
 #include "libft/libft.h"
 
-typedef	struct s_lem
+typedef	struct	s_lem
 {
+	int			error;
 	int			ants;
 	
 }				t_lem;
+
+typedef	struct	s_room
+{
+	char		*name;
+	
+}				t_room;

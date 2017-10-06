@@ -19,7 +19,6 @@ void	main(void)
 	j = (t_lem *)malloc(sizeof(t_lem));
 	lem_in_init(j);
 	lem_in_read(j);
-
 	if (j->error == 1)
 		return (lem_in_fail(j));
 
@@ -27,6 +26,8 @@ void	main(void)
 
 void	lem_in_init(t_lem j)
 {
+	j->error = 0;
+	j->ants = -1;
 	/*занулить все*/
 }
 
@@ -34,6 +35,7 @@ ini		lem_in_fail(t_lem j)
 {
 	/*зафришить все*/
 	write(1, "ERROR\n", 6);
+
 }
 
 void	lem_in_read(t_lem j)
@@ -43,13 +45,16 @@ void	lem_in_read(t_lem j)
 	while (get_next_line(0, &l))
 	{
 		if (l[0] == "#")
-			lem_in_com(j, l);
+			lem_in_comment(j, l);
 		else if (ft_isdigit(l[0]) && j->ants == -1)
 			lem_in_ants(j, l);
-
-
-
+		else if (ft_isascii[0] && j->ants != -1)
+			lem_in_rooms(j, l);
+		else
+			j->error == 1;
 		ft_strdel(&l);
+		if (j->error == 1)
+			break ;
 	}
 
 	/*read all*/
