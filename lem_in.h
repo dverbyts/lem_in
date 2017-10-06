@@ -18,6 +18,8 @@ typedef	struct	s_lem
 {
 	int			error;
 	int			ants;
+	int			start;
+	int			end;
 	
 }				t_lem;
 

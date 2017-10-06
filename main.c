@@ -28,6 +28,8 @@ void	lem_in_init(t_lem j)
 {
 	j->error = 0;
 	j->ants = -1;
+	j->start = -1;
+	j->end = -1;
 	/*занулить все*/
 }
 
@@ -58,4 +60,41 @@ void	lem_in_read(t_lem j)
 	}
 
 	/*read all*/
+}
+
+void	lem_in_comment(t_lem j, char *l)
+{
+	int i;
+	int len;
+
+	if (l[0] == '#' && l[1] != '#')
+		return ;
+	len = ft_strlen(l);
+	i = 1
+	while (l[++i])
+	{
+		if (i + 6 <= len)
+		{
+			if (l[i] == 's' && l[i + 1] == 't' && l[i + 2] == 'a' &&
+				l[i + 3] == 'r' && l[i + 4] == 't' && j->start == -1)
+				j->start = 1;
+		}
+		else if (i + 3 <= len)
+		{
+			if (l[i] == 'e' && l[i + 1] == 'n' && l[i + 2] == 'd'
+				&& j->end == -1)
+				j->end = 1;
+		}
+	}
+	if (j->start == 1 || j->end == 1)
+		return ;
+	j->error = 1;
+}
+
+void	lem_in_rooms(j, lt_lem j, char *l)
+{
+	/*
+	** j->end == 1 или j->start == 1, тогда это комната старта или конца
+	** В конце поставить j->end = 0 или j->start = 0 соответственно
+	*/
 }
