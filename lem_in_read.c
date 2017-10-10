@@ -65,7 +65,24 @@ int		lem_in_is_room(t_lem j, char *l)
 ** В конце поставить j->end = 0 или j->start = 0 соответственно
 */
 
-t_room	*lem_in_rooms(t_lem j, char *l)
+void	*lem_in_rooms(t_lem j, char *l)
+{
+	t_room *r;
+	t_room *buf;
+
+	r = lem_in_make_room(j, l);
+	if (j->room == NULL)
+	{
+		j->room = r;
+		return ;
+	}
+	buf = j->room;
+	while (buf->next_room != NULL)
+		buf = buf->next_room;
+	buf->next_room = r;
+}
+
+t_room	*lem_in_make_room(t_lem j, char *l)
 {
 	char **buf;
 	t_room *r;
@@ -75,12 +92,12 @@ t_room	*lem_in_rooms(t_lem j, char *l)
 	buf = ft_strsplit(l, ' ');
 	r->name = ft_strdup(buf[0]);
 	r->number = j->++rooms_number;
-	if (j->end == 1)
+	if (j->end == 1 && j->start != 1)
 	{
 		r->end = 1;
 		j->end = 0;
 	}
-	if (j->start == 1)
+	if (j->start == 1 && j->end != 1)
 	{
 		r->start = 1;
 		j->start = 0;

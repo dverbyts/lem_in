@@ -14,30 +14,42 @@
 
 void	lem_in_init(t_lem j)
 {
-	j->error = 0;
+	ft_bzero(j, sizeof(t_lem));
 	j->ants = -1;
 	j->start = -1;
 	j->end = -1;
-	j->rooms_number = -1;
+	// j->rooms_number = -1;
 	j->rooms_done = -1;
 	j->g1 = -1;
 	j->g2 = -1;
 	j->g3 = -1;
 	j->g4 = -1;
 	j->g5 = -1;
-	/*занулить все*/
+	j->input = (char **)malloc(sizeof(char *));
+	j->input[0] = (char *)malloc(sizeof(char))
+	j->input[0][0] = '\0';
+	j->room = NULL;
 }
 
 void	lem_in_room_init(t_room *room)
 {
-	room->start = 0;
-	room->end = 0;
+	ft_bzero(room, sizeof(t_room));
+	// room->start = 0;
+	// room->end = 0;
 	room->number = -1;
+	room->link = NULL;
+	room->next_room = NULL;	
+}
+
+void	lem_in_link_init(t_link *link)
+{
+	ft_bzero(link, sizeof(t_link));
+	link->next_link = NULL;
+	link->link_room = NULL;
 }
 
 ini		lem_in_fail(t_lem j)
 {
 	/*зафришить все*/
 	write(1, "ERROR\n", 6);
-
 }
