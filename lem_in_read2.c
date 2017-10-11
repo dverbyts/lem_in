@@ -12,53 +12,55 @@
 
 #include "lem_in.h"
 
-void	lem_in_save_input(t_lem j, char *l, int i)
+void	lem_in_save_input(t_lem *j, char *l, int i)
 {
-	while (l[i]);
+	while (l[i])
 	{
 		if (l[i] == '\n' && l[i + 1] == '\0')
 		{
-			j->input = ft_strjoin(j->input, ft_strdup(l));
+			j->input = lem_in_strjoin(j->input, ft_strdup(l));
 			return ;
 		}
 		i++;
 	}
-	j->input = ft_strjoin(j->input, ft_strdup(l));
-	j->input = ft_strjoin(j->input, "\n\0");
+	j->input = lem_in_strjoin(j->input, ft_strdup(l));
+	j->input = lem_in_strjoin(j->input, ft_strdup("\n\0"));
 }
 
-int		lem_in_is_link(t_lem j, char *l)
+int		lem_in_is_link(t_lem *j, char *l, int re)
 {
 	char **buf;
-	int	re;
+	t_room *room_buf;
 
-	j->g2 = -1;
-	re = -1;
+	buf = NULL;
 	buf = ft_strsplit(l, '-');
+	if (buf == NULL)
+		return (0);
 	if (ft_strequ(buf[0], l))
 		re = 0;
-	while (j->rooms[++j->g2] != NULL && re == -1)
+	room_buf = j->room;
+	while (room_buf != NULL && re == -1)
 	{
-		if (ft_strequ(buf[0], j->rooms[j->g2]->name))
+		if (ft_strequ(buf[0], room_buf->name))
 		{
 			if (j->rooms_done != 1)
 				j->rooms_done = 1;
 			re = 1;
 		}
+		room_buf = room_buf->next_room;
 	}
 	while (*buf++)
-		ft_strdel(*buf);
+		ft_strdel(buf);
 	ft_strdel(buf);
 	if (re == -1)
 		re = 0;
 	return (re);
 }
 
-void	lem_in_links(t_lem j, char *l, int i)
+void	lem_in_links(t_lem *j, char *l, int i)
 {
 	t_room *room_buf;
 	t_link *r;
-	t_link *buf;
 	char **splt;
 
 	splt = ft_strsplit(l, '-');
@@ -73,20 +75,19 @@ void	lem_in_links(t_lem j, char *l, int i)
 			if (room_buf->link == NULL)
 				room_buf->link = r;
 			else
-				lem_in_insert_link();
+				lem_in_insert_link(r , room_buf);
 			break ;
 		}
 		room_buf = room_buf->next_room;
 	}
 	while (splt[++i])
-		ft_strdel(splt[i]);
+		ft_strdel(&splt[i]);
 	ft_strdel(splt);
 }
 
-t_link	lem_in_make_link(t_lem j, t_room room_buf, char **splt)
+t_link	*lem_in_make_link(t_lem *j, t_room *room_buf, char **splt)
 {
 	t_link *r;
-	t_link *link_buf;
 	t_room *room;
 
 	r = (t_link *)malloc(sizeof(t_link));
@@ -107,7 +108,7 @@ t_link	lem_in_make_link(t_lem j, t_room room_buf, char **splt)
 	return (NULL);
 }
 
-void	lem_in_insert_link(t_link *r, t_room room_buf)
+void	lem_in_insert_link(t_link *r, t_room *room_buf)
 {
 	t_link *buf;
 

@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-void	lem_in_comment(t_lem j, char *l)
+void	lem_in_comment(t_lem *j, char *l)
 {
 	if (l[0] == '#' && l[1] != '#')
 		return ;
@@ -25,38 +25,30 @@ void	lem_in_comment(t_lem j, char *l)
 	j->error = 1;
 }
 
-void	lem_in_ants(t_lem j, char *l)
+void	lem_in_ants(t_lem *j, char *l)
 {
 	j->ants = ft_atoi(l);
 	if (j->ants < 1)
-		j->error == 1;
+		j->error = 1;
 }
 
-int		lem_in_is_room(t_lem j, char *l)
+int		lem_in_is_room(t_lem *j, char *l, int g1, int g2)
 {
-	if (j->rooms_done == 1)
+	while (l[g1] && l[g1] != ' ')
+		g1++;
+	while (l[g1])
 	{
-		j->error = 1;
-		return (0);
-	}
-	j->g3 = 0;
-	j->g2 = 1;
-	while (l[j->g3] && l[j->g3] != ' ')
-		j->g3++;
-	while (l[++j->g3])
-	{
-		if (l[j->g3] == ' ')
-			j->g2++;
-		else if (ft_isdigit(l[j->g3]) != 1 || j->g2 > 2)
+		if (l[g1] == ' ')
+			g2++;
+		else if (ft_isdigit(l[g1]) != 1 || g2 > 2)
 		{
 			j->error = 1;
-			j->g3 = -1;
-			j->g2 = -1;
 			return (0);
 		}
+		g1++;
 	}
-	j->g3 = -1;
-	j->g2 = -1;
+	if (g2 < 2)
+		return (0);
 	return (1);
 }
 
@@ -65,11 +57,16 @@ int		lem_in_is_room(t_lem j, char *l)
 ** В конце поставить j->end = 0 или j->start = 0 соответственно
 */
 
-void	*lem_in_rooms(t_lem j, char *l)
+void	lem_in_rooms(t_lem *j, char *l)
 {
 	t_room *r;
 	t_room *buf;
 
+	if (j->rooms_done == 1)
+	{
+		j->error = 1;
+		return ;
+	}
 	r = lem_in_make_room(j, l);
 	if (j->room == NULL)
 	{
@@ -82,7 +79,7 @@ void	*lem_in_rooms(t_lem j, char *l)
 	buf->next_room = r;
 }
 
-t_room	*lem_in_make_room(t_lem j, char *l)
+t_room	*lem_in_make_room(t_lem *j, char *l)
 {
 	char **buf;
 	t_room *r;
@@ -91,7 +88,7 @@ t_room	*lem_in_make_room(t_lem j, char *l)
 	lem_in_room_init(r);
 	buf = ft_strsplit(l, ' ');
 	r->name = ft_strdup(buf[0]);
-	r->number = j->++rooms_number;
+	r->number = ++j->rooms_number;
 	if (j->end == 1 && j->start != 1)
 	{
 		r->end = 1;
@@ -102,9 +99,9 @@ t_room	*lem_in_make_room(t_lem j, char *l)
 		r->start = 1;
 		j->start = 0;
 	}
-	ft_strdel(buf[0]);
-	ft_strdel(buf[1]);
-	ft_strdel(buf[2]);
+	ft_strdel(&buf[0]);
+	ft_strdel(&buf[1]);
+	ft_strdel(&buf[2]);
 	ft_strdel(buf);
 	return (r);
 }

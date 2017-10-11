@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-void	lem_in_init(t_lem j)
+void	lem_in_init(t_lem *j)
 {
 	ft_bzero(j, sizeof(t_lem));
 	j->ants = -1;
@@ -20,14 +20,13 @@ void	lem_in_init(t_lem j)
 	j->end = -1;
 	// j->rooms_number = -1;
 	j->rooms_done = -1;
-	j->g1 = -1;
-	j->g2 = -1;
-	j->g3 = -1;
-	j->g4 = -1;
-	j->g5 = -1;
-	j->input = (char **)malloc(sizeof(char *));
-	j->input[0] = (char *)malloc(sizeof(char))
-	j->input[0][0] = '\0';
+	// j->g1 = -1;
+	// j->g2 = -1;
+	// j->g3 = -1;
+	// j->g4 = -1;
+	// j->g5 = -1;
+	j->input = (char *)malloc(sizeof(char));
+	j->input[0] = '\0';
 	j->room = NULL;
 }
 
@@ -48,8 +47,9 @@ void	lem_in_link_init(t_link *link)
 	link->link_room = NULL;
 }
 
-ini		lem_in_fail(t_lem j)
+int		lem_in_fail(t_lem *j)
 {
 	/*зафришить все*/
 	write(1, "ERROR\n", 6);
+	return (0);
 }

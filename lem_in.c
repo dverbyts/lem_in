@@ -12,38 +12,38 @@
 
 #include "lem_in.h"
 
-void	main(void)
+int	main(void)
 {
 	t_lem	*j;
+
 
 	j = (t_lem *)malloc(sizeof(t_lem));
 	lem_in_init(j);
 	lem_in_read(j);
-	ft_putstr(j->input[0]);
+	ft_putstr(j->input);
 	if (j->error == 1)
 		return (lem_in_fail(j));
-
+	return (1);
 }
 
-void	lem_in_read(t_lem j)
+void	lem_in_read(t_lem *j)
 {
 	char	*l;
-
-	j->g1 = 0;
-	while (get_next_line(0, &l))
+	
+	int fd = open("test", O_RDONLY);
+	while (get_next_line(fd, &l))
 	{
 		lem_in_save_input(j, l, 0);
-		if (l[0] == "#")
+		if (l[0] == '#')
 			lem_in_comment(j, l);
 		else if (ft_isdigit(l[0]) && j->ants == -1)
 			lem_in_ants(j, l);
-		else if (ft_isascii[0] && j->ants != -1 && lem_in_is_room(j, l) &&
-			j->rooms_done != 1)
+		else if (ft_isascii(l[0]) && j->ants != -1 && lem_in_is_room(j, l, 0, 0))
 			lem_in_rooms(j, l);
-		else if (ft_isascii[0] && j->ants != -1 && lem_in_is_link(j, l))
+		else if (ft_isascii(l[0]) && j->ants != -1 && lem_in_is_link(j, l, -1))
 			lem_in_links(j, l, -1);
 		else
-			j->error == 1;
+			j->error = 1;
 		ft_strdel(&l);
 		if (j->error == 1)
 			break ;
