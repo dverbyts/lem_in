@@ -29,19 +29,19 @@ int	main(void)
 void	lem_in_read(t_lem *j)
 {
 	char	*l;
-	
+
 	int fd = open("test", O_RDONLY);
-	while (get_next_line(fd, &l))
+	while (get_next_line(fd, &l) == 1)
 	{
 		lem_in_save_input(j, l, 0);
 		if (l[0] == '#')
 			lem_in_comment(j, l);
 		else if (ft_isdigit(l[0]) && j->ants == -1)
 			lem_in_ants(j, l);
-		else if (ft_isascii(l[0]) && j->ants != -1 && lem_in_is_room(j, l, 0, 0))
+		else if (ft_isascii(l[0]) && j->ants != -1 && lem_in_is_room(j, l, 0))
 			lem_in_rooms(j, l);
 		else if (ft_isascii(l[0]) && j->ants != -1 && lem_in_is_link(j, l, -1))
-			lem_in_links(j, l, -1);
+			lem_in_links(j, l, -1, ft_strsplit(l, '-'));
 		else
 			j->error = 1;
 		ft_strdel(&l);
@@ -49,4 +49,19 @@ void	lem_in_read(t_lem *j)
 			break ;
 	}
 	/*read all*/
+}
+
+void	lem_in_save_input(t_lem *j, char *l, int i)
+{
+	while (l[i])
+	{
+		if (l[i] == '\n' && l[i + 1] == '\0')
+		{
+			j->input = lem_in_strjoin(j->input, ft_strdup(l));
+			return ;
+		}
+		i++;
+	}
+	j->input = lem_in_strjoin(j->input, ft_strdup(l));
+	j->input = lem_in_strjoin(j->input, ft_strdup("\n\0"));
 }

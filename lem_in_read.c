@@ -28,12 +28,21 @@ void	lem_in_comment(t_lem *j, char *l)
 void	lem_in_ants(t_lem *j, char *l)
 {
 	j->ants = ft_atoi(l);
+	while (*l)
+	{
+		if (ft_isdigit(*l) != 1)
+			j->error = 1;
+		l++;
+	}
 	if (j->ants < 1)
 		j->error = 1;
 }
 
-int		lem_in_is_room(t_lem *j, char *l, int g1, int g2)
+int		lem_in_is_room(t_lem *j, char *l, int g1)
 {
+	int g2;
+
+	g2 = 0;
 	while (l[g1] && l[g1] != ' ')
 		g1++;
 	while (l[g1])
