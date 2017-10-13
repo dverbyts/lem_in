@@ -1,0 +1,11 @@
+35
+frog 5 0
+##start
+
+ascii 1 2
+##end
+nuul 9 2
+nuu 5 4
+nuul-nuu
+nuu-nuul
+frog-ascii

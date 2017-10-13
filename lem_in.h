@@ -23,6 +23,7 @@ typedef	struct		s_lem
 	int				end;
 	int				rooms_done;
 	int				rooms_number;
+	int				**way;
 	struct	s_room	*room;
 	// int				g1;
 	// int				g2;
