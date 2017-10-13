@@ -23,6 +23,9 @@ int	main(void)
 	ft_putstr(j->input);
 	if (j->error == 1)
 		return (lem_in_fail(j));
+	//lem_in_find_way(j);
+	if (j->error == 1)
+		return (lem_in_fail(j));
 	return (1);
 }
 
@@ -40,7 +43,8 @@ void	lem_in_read(t_lem *j)
 			lem_in_ants(j, l);
 		else if (ft_isascii(l[0]) && j->ants != -1 && lem_in_is_room(j, l, 0))
 			lem_in_rooms(j, l);
-		else if (ft_isascii(l[0]) && j->ants != -1 && lem_in_is_link(j, l, -1))
+		else if (l[0] != '\0' && ft_isascii(l[0]) && j->ants != -1 &&
+				lem_in_is_link(j, l, -1))
 			lem_in_links(j, l, -1, ft_strsplit(l, '-'));
 		else
 			j->error = 1;

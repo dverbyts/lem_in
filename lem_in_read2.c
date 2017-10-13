@@ -36,7 +36,7 @@ int		lem_in_is_link(t_lem *j, char *l, int re)
 	re = lem_in_is_link2(j, buf, re);
 	while (*buf++)
 		ft_strdel(buf);
-	ft_strdel(buf);
+	free(buf);
 	return (re);
 }
 
@@ -85,7 +85,7 @@ void	lem_in_links(t_lem *j, char *l, int i, char **splt)
 	}
 	while (splt[++i])
 		ft_strdel(&splt[i]);
-	ft_strdel(splt);
+	free(splt);
 }
 
 void	lem_in_links2(t_lem *j, t_room *room_buf, char **splt)

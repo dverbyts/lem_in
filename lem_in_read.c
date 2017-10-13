@@ -49,7 +49,7 @@ int		lem_in_is_room(t_lem *j, char *l, int g1)
 	{
 		if (l[g1] == ' ')
 			g2++;
-		else if (ft_isdigit(l[g1]) != 1 || g2 > 2)
+		else if (ft_isdigit(l[g1]) != 1 || g2 > 2 || l[0] == 'L')
 		{
 			j->error = 1;
 			return (0);
