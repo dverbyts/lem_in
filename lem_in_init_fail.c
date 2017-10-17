@@ -34,7 +34,7 @@ void	lem_in_room_init(t_room *room)
 {
 	ft_bzero(room, sizeof(t_room));
 	// room->start = 0;
-	// room->end = 0;
+	room->vertex = -1;
 	room->number = -1;
 	room->link = NULL;
 	room->next_room = NULL;	
@@ -52,4 +52,16 @@ int		lem_in_fail(t_lem *j)
 	/*зафришить все*/
 	write(1, "ERROR\n", 6);
 	return (0);
+}
+
+t_way	*lem_in_way_init(t_room *room_buf, int vertex)
+{
+	t_way *memory;
+
+	memory = (t_way *)malloc(sizeof(t_way));
+	ft_bzero(memory, sizeof(t_way));
+	memory->vertex = vertex;
+	memory->room = room_buf;
+	memory->next_step = NULL;
+	return (memory);
 }

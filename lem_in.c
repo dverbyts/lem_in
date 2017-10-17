@@ -23,7 +23,7 @@ int	main(void)
 	ft_putstr(j->input);
 	if (j->error == 1)
 		return (lem_in_fail(j));
-	//lem_in_find_way(j);
+	lem_in_find_way(j);
 	if (j->error == 1)
 		return (lem_in_fail(j));
 	return (1);

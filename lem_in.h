@@ -23,7 +23,8 @@ typedef	struct		s_lem
 	int				end;
 	int				rooms_done;
 	int				rooms_number;
-	int				**way;
+	int				way_number;
+	struct 	s_way	**way;
 	struct	s_room	*room;
 	// int				g1;
 	// int				g2;
@@ -51,6 +52,7 @@ typedef	struct		s_room
 {
 	char			*name;
 	int				number;
+	int				vertex;
 	int				start;
 	int				end;
 	int				ant;
@@ -87,11 +89,28 @@ typedef struct 		s_link
 ** link - ссылка на связи с другими комнатами
 */
 
+typedef struct 		s_way
+{
+	int				vertex;
+	struct	s_room	*room;
+	struct	s_way	*next_step;
+}					t_way;
+
+/*
+** Поиск и карта пути от старта к выходу
+**
+** size - длина/количество переходов между комнатами. для выбора самого 
+** короткого пути.
+** link - ссылка на нужный переход между комнатами.
+** next_step - следующий шаг на пути к выходу.
+*/
+
 int		main(void);
 void	lem_in_read(t_lem *j);
 void	lem_in_init(t_lem *j);
 void	lem_in_room_init(t_room *room);
 void	lem_in_link_init(t_link *link);
+t_way	*lem_in_way_init(t_room *room_buf, int vertex);
 int		lem_in_fail(t_lem *j);
 void	lem_in_save_input(t_lem *j, char *l, int i);
 int		lem_in_is_link(t_lem *j, char *l, int re);
@@ -105,6 +124,10 @@ int		lem_in_is_room(t_lem *j, char *l, int g1);
 void	lem_in_rooms(t_lem *j, char *l);
 t_room	*lem_in_make_room(t_lem *j, char *l);
 char	*lem_in_strjoin(char *t, char *y);
+void	lem_in_find_way(t_lem *j);
+int		lem_in_recursion(t_lem *j, t_room *room, int vertex, int nmbr);
+t_way	**lem_in_check_way(t_lem *j, t_room *room, int vertex);
+t_way	**lem_in_more_way(t_lem *j);
 
 
 #endif
