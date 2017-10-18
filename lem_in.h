@@ -13,6 +13,7 @@
 #ifndef LEM_IN_H
 # define LEM_IN_H
 # include "libft/libft.h"
+# define LEAK system("leaks $(echo $(ps | grep lem-in | cut -d ' ' -f 1) | cut -d ' ' -f 2) && leaks $(echo $(ps | grep lem-in | cut -d ' ' -f 1) | cut -d ' ' -f 1)"); 
 
 typedef	struct		s_lem
 {
@@ -26,12 +27,6 @@ typedef	struct		s_lem
 	int				way_number;
 	struct 	s_way	**way;
 	struct	s_room	*room;
-	// int				g1;
-	// int				g2;
-	// int				g3;
-	// int				g4;
-	// int				g5;
-	
 }					t_lem;
 
 /*
@@ -129,9 +124,8 @@ void	lem_in_recursion(t_lem *j, t_room *room, int vertex, t_way *way);
 int		lem_in_save_way(t_lem *j, t_room *room, t_way *way);
 t_way	**lem_in_we_have_way(t_lem *j, t_way *way, int e);
 void	lem_in_del_steps(t_way *w1, int vertex);
-// int		lem_in_recursion(t_lem *j, t_room *room, int vertex, int nmbr);
-// t_way	**lem_in_check_way(t_lem *j, t_room *room, int vertex);
-// t_way	**lem_in_more_way(t_lem *j);
-
+void	lem_in_go_go_ants(t_lem *j, int l);
+void	lem_in_go_ants(j, l);
+int		lem_in_wich_way(t_lem *j, int e, int i, int l);
 
 #endif

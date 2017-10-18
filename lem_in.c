@@ -52,7 +52,6 @@ void	lem_in_read(t_lem *j)
 		if (j->error == 1)
 			break ;
 	}
-	/*read all*/
 }
 
 void	lem_in_save_input(t_lem *j, char *l, int i)
