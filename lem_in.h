@@ -125,9 +125,13 @@ void	lem_in_rooms(t_lem *j, char *l);
 t_room	*lem_in_make_room(t_lem *j, char *l);
 char	*lem_in_strjoin(char *t, char *y);
 void	lem_in_find_way(t_lem *j);
-int		lem_in_recursion(t_lem *j, t_room *room, int vertex, int nmbr);
-t_way	**lem_in_check_way(t_lem *j, t_room *room, int vertex);
-t_way	**lem_in_more_way(t_lem *j);
+void	lem_in_recursion(t_lem *j, t_room *room, int vertex, t_way *way);
+int		lem_in_save_way(t_lem *j, t_room *room, t_way *way);
+t_way	**lem_in_we_have_way(t_lem *j, t_way *way, int e);
+void	lem_in_del_steps(t_way *w1, int vertex);
+// int		lem_in_recursion(t_lem *j, t_room *room, int vertex, int nmbr);
+// t_way	**lem_in_check_way(t_lem *j, t_room *room, int vertex);
+// t_way	**lem_in_more_way(t_lem *j);
 
 
 #endif

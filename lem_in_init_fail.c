@@ -20,7 +20,7 @@ void	lem_in_init(t_lem *j)
 	j->end = -1;
 	// j->rooms_number = -1;
 	j->rooms_done = -1;
-	// j->g1 = -1;
+	j->way_number = -1;
 	// j->g2 = -1;
 	// j->g3 = -1;
 	// j->g4 = -1;
