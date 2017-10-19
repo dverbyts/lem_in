@@ -27,11 +27,11 @@ void	lem_in_find_way(t_lem *j)
 		lem_in_recursion(j, room_buf, 0, w);
 	}
 	else
-		j->error = 0;
+		j->error = 1;
 	if (j->way == NULL)
-		j->error = 0;
+		j->error = 1;
 	else
-		lem_in_go_go_ants(j, 0);
+		lem_in_go_ants(j, 0);
 }
 
 void	lem_in_recursion(t_lem *j, t_room *room, int vertex, t_way *way)

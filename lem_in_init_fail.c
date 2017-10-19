@@ -37,6 +37,7 @@ void	lem_in_room_init(t_room *room)
 	room->vertex = -1;
 	room->number = -1;
 	room->link = NULL;
+	room->ant = -1;
 	room->next_room = NULL;	
 }
 

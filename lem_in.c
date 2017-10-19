@@ -20,7 +20,7 @@ int	main(void)
 	j = (t_lem *)malloc(sizeof(t_lem));
 	lem_in_init(j);
 	lem_in_read(j);
-	ft_putstr(j->input);
+	ft_printf("%s\n", j->input);
 	if (j->error == 1)
 		return (lem_in_fail(j));
 	lem_in_find_way(j);

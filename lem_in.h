@@ -124,8 +124,8 @@ void	lem_in_recursion(t_lem *j, t_room *room, int vertex, t_way *way);
 int		lem_in_save_way(t_lem *j, t_room *room, t_way *way);
 t_way	**lem_in_we_have_way(t_lem *j, t_way *way, int e);
 void	lem_in_del_steps(t_way *w1, int vertex);
-void	lem_in_go_go_ants(t_lem *j, int l);
-void	lem_in_go_ants(j, l);
+void	lem_in_go_ants(t_lem *j, int l);
+void	lem_in_go_go_ants(t_lem *j, int l, t_way *end);
 int		lem_in_wich_way(t_lem *j, int e, int i, int l);
 
 #endif
