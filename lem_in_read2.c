@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-int		lem_in_is_link(t_lem *j, char *l, int re)
+int		lem_in_is_link(t_lem *j, char *l, int re, int i)
 {
 	char **buf;
 	t_room *room_buf;
@@ -34,9 +34,9 @@ int		lem_in_is_link(t_lem *j, char *l, int re)
 		room_buf = room_buf->next_room;
 	}
 	re = lem_in_is_link2(j, buf, re);
-	while (*buf++)
-		ft_strdel(buf);
-	ft_strdel(buf);
+	while (buf[++i])
+		ft_strdel(&buf[i]);
+	free(buf);
 	return (re);
 }
 
@@ -60,7 +60,7 @@ int		lem_in_is_link2(t_lem *j, char **buf, int re)
 	return (re);
 }
 
-void	lem_in_links(t_lem *j, char *l, int i, char **splt)
+void	lem_in_links(t_lem *j, int i, char **splt)
 {
 	t_room *room_buf;
 	t_link *buf;

@@ -30,8 +30,6 @@ void	lem_in_find_way(t_lem *j)
 		j->error = 1;
 	if (j->way == NULL)
 		j->error = 1;
-	else
-		lem_in_go_ants(j, 0);
 }
 
 void	lem_in_recursion(t_lem *j, t_room *room, int vertex, t_way *way)
