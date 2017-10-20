@@ -74,7 +74,7 @@ void	lem_in_rooms(t_lem *j, char *l)
 	t_room *r;
 	t_room *buf;
 
-	if (j->rooms_done == 1)
+	if (j->rooms_done == 1 || l[0] == 'L')
 	{
 		j->error = 1;
 		return ;

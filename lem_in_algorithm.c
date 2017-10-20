@@ -16,7 +16,13 @@ void	lem_in_find_way(t_lem *j)
 {
 	t_room	*room_buf;
 	t_way	*w;
-
+//
+//	if (!j->room)
+//	{
+//		j->error = 1;
+//		return ;
+//	}
+//
 	room_buf = j->room;
 	while (room_buf->start != 1)
 		room_buf = room_buf->next_room;

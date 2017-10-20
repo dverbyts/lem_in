@@ -32,7 +32,7 @@ int	main(void)
 	}
 	ft_printf("%s", j->input);
 	lem_in_go_ants(j, 0);
-//	LEAK;
+	LEAK;
 	return (1);
 }
 
@@ -43,7 +43,7 @@ void	lem_in_read(t_lem *j)
 	while (get_next_line(0, &l) == 1)
 	{
 		lem_in_save_input(j, l, 0);
-		if (l[0] == '#' && (j->end != 1 || j->end != 1))
+		if (l[0] == '#' && j->start != 1 && j->end != 1)
 			lem_in_comment(j, l);
 		else if (ft_isdigit(l[0]) && j->ants == -1)
 			lem_in_ants(j, l);
@@ -51,7 +51,7 @@ void	lem_in_read(t_lem *j)
 			l[0] != '#')
 			lem_in_rooms(j, l);
 		else if (l[0] != '\0' && ft_isascii(l[0]) && j->ants != -1 &&
-				lem_in_is_link(j, l, -1, -1) && (j->end != 1 || j->end != 1))
+				lem_in_is_link(j, l, -1, -1) && j->end != 1 && j->end != 1)
 			lem_in_links(j, -1, ft_strsplit(l, '-'));
 		else
 			j->error = 1;
@@ -59,7 +59,8 @@ void	lem_in_read(t_lem *j)
 		if (j->error == 1)
 			break ;
 	}
-	if (j->input[0] == '\0')
+	if (j->input[0] == '\0' || j->start != 0 || j->end != 0 ||
+		j->rooms_number < 1 || j->rooms_done < 0)
 		j->error = 1;
 }
 

@@ -14,81 +14,47 @@
 
 void	lem_in_go_ants(t_lem *j, int l)
 {
-	t_way *buf;
-
-	buf = j->way[l];
-	while (buf->next_step != NULL)
-		buf = buf->next_step;
 	l = lem_in_wich_way(j, -1, -1, -1);
-	ft_printf("\n\n");
-//	j->way[l] = lem_in_revert_way(j, l, buf);
-//	buf = j->way[l];
-//	while (buf->next_step != NULL)
-//		buf = buf->next_step;
-	lem_in_go_go_ants(j, l, buf);
 	ft_printf("\n");
+	j->way[l]->room->ant = j->ants;
+	j->way[l] = lem_in_revert_way(j, l);
+	lem_in_go_go_ants(j, l);
 }
 
-t_way 	*lem_in_revert_way(t_lem *j, int l, t_way *end)
+t_way 	*lem_in_revert_way(t_lem *j, int l)
 {
-	t_way *buf1;
-	t_way *buf2;
-	t_way *buf3;
+	t_way *prev;
+	t_way *current;
+	t_way *next;
 
-	buf1 = end;
-	buf2 = j->way[l];
-	buf3 = buf2->next_step;
-	buf2->next_step = NULL;
-	buf1->next_step = buf2;
-	buf2 = buf3;
-	buf3 = buf3->next_step;
-	while (1)
+	prev = NULL;
+	current = j->way[l];
+	while (current != NULL)
 	{
-		buf2->next_step = buf1->next_step;
-		buf1->next_step = buf2;
-		buf2 = buf3;
-		if (buf2 == NULL)
-			break ;
-		buf3 = buf3->next_step; 
+		next = current->next_step;
+		current->next_step = prev;
+		prev = current;
+		current = next;
 	}
-	return(buf1);
+	return (prev);
 }
 
-void	lem_in_go_go_ants(t_lem *j, int l, t_way *end)
+void	lem_in_go_go_ants(t_lem *j, int l)
 {
 	t_way *buf;
 
-	end->room->ant = j->ants;
-	while (end->room->ant <= j->ants)
+	while ((j->way[l]->room->ant + 1) < j->ants)
 	{
 		buf = j->way[l];
-		while (buf->next_step != NULL)
+		while (buf != NULL)
 		{
-//			while (buf->next_step->room->ant + 1 == j->ants)
-//			{
-//				buf = buf->next_step;
-//				if (buf->next_step == NULL)
-//					return ;
-//			}
-//			if (buf->next_step->room->ant > -1)
-//			{
-//				buf->room->ant += 1;
-//				ft_printf("L%d-%s ", buf->room->ant + 1,
-//				buf->next_step->room->name);
-//			}
-
-			while (buf->next_step->room->ant + 1 == j->ants)
-			{
-				buf = buf->next_step;
-				if (buf->next_step == NULL)
-					return ;
-			}
-			buf->next_step->room->ant += 1;
-			if (buf->next_step->room->ant + 1 < j->ants)
-					lem_in_go_go_ants(j, l, end);
-			ft_printf("L%d-%s ", buf->next_step->room->ant + 1,	buf->next_step->room->name);
-			if (buf->next_step->room->ant == 0)
+			if ((buf->room->ant + 1) == j->ants || buf->next_step == NULL)
 				break ;
+			if (buf->next_step->room->ant > -1 && buf->room->ant < j->ants)
+			{
+				buf->room->ant += 1;
+				ft_printf("L%d-%s ", buf->room->ant + 1, buf->room->name);
+			}
 			buf = buf->next_step;
 		}
 		ft_printf("\n");
