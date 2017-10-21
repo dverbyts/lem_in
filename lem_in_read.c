@@ -16,7 +16,7 @@ void	lem_in_comment(t_lem *j, char *l)
 {
 	if (l[0] == '#' && l[1] != '#')
 		return ;
-	if ((j->end != -1 && ft_strequ(l, "##end\0")) || 
+	if ((j->end != -1 && ft_strequ(l, "##end\0")) ||
 		(j->start != -1 && ft_strequ(l, "##start\0")))
 	{
 		j->error = 1;
@@ -71,8 +71,8 @@ int		lem_in_is_room(t_lem *j, char *l, int g1)
 
 void	lem_in_rooms(t_lem *j, char *l)
 {
-	t_room *r;
-	t_room *buf;
+	t_room	*r;
+	t_room	*buf;
 
 	if (j->rooms_done == 1 || l[0] == 'L')
 	{
@@ -100,8 +100,8 @@ void	lem_in_rooms(t_lem *j, char *l)
 
 t_room	*lem_in_make_room(t_lem *j, char *l, int i)
 {
-	char **buf;
-	t_room *r;
+	char	**buf;
+	t_room	*r;
 
 	r = (t_room *)malloc(sizeof(t_room));
 	lem_in_room_init(r);

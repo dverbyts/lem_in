@@ -15,7 +15,7 @@ NAME = lem-in
 CFLAGS = -Wall -Wextra -Werror -g
 
 SRC = lem_in.c lem_in_algorithm.c lem_in_algorithm2.c lem_in_init_fail.c \
-		lem_in_join_strdel.c lem_in_read.c lem_in_read2.c
+		lem_in_read.c lem_in_read2.c
 
 OBJ = $(SRC:.c=.o)
 

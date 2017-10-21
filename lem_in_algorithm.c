@@ -16,13 +16,12 @@ void	lem_in_find_way(t_lem *j)
 {
 	t_room	*room_buf;
 	t_way	*w;
-//
-//	if (!j->room)
-//	{
-//		j->error = 1;
-//		return ;
-//	}
-//
+
+	if (!j->room)
+	{
+		j->error = 1;
+		return ;
+	}
 	room_buf = j->room;
 	while (room_buf->start != 1)
 		room_buf = room_buf->next_room;
@@ -31,6 +30,7 @@ void	lem_in_find_way(t_lem *j)
 		w = lem_in_way_init(room_buf, 0);
 		room_buf->vertex = 0;
 		lem_in_recursion(j, room_buf, 0, w);
+		free(w);
 	}
 	else
 		j->error = 1;
@@ -119,6 +119,6 @@ t_way	**lem_in_we_have_way(t_lem *j, t_way *way, int e)
 		w2 = w2->next_step;
 	}
 	if (j->way != NULL)
-		free (j->way);
+		free(j->way);
 	return (ww);
 }

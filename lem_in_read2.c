@@ -14,8 +14,8 @@
 
 int		lem_in_is_link(t_lem *j, char *l, int re, int i)
 {
-	char **buf;
-	t_room *room_buf;
+	char	**buf;
+	t_room	*room_buf;
 
 	buf = ft_strsplit(l, '-');
 	if (buf == NULL)
@@ -42,7 +42,7 @@ int		lem_in_is_link(t_lem *j, char *l, int re, int i)
 
 int		lem_in_is_link2(t_lem *j, char **buf, int re)
 {
-	t_room *room_buf;
+	t_room	*room_buf;
 
 	if (re == -1)
 		return (0);
@@ -62,8 +62,8 @@ int		lem_in_is_link2(t_lem *j, char **buf, int re)
 
 void	lem_in_links(t_lem *j, int i, char **splt)
 {
-	t_room *room_buf;
-	t_link *buf;
+	t_room	*room_buf;
+	t_link	*buf;
 
 	room_buf = j->room;
 	while (room_buf != NULL)
@@ -76,7 +76,7 @@ void	lem_in_links(t_lem *j, int i, char **splt)
 			{
 				while (buf->next_link != NULL)
 					buf = buf->next_link;
-				buf->next_link = lem_in_make_link(j, room_buf, splt);;
+				buf->next_link = lem_in_make_link(j, room_buf, splt);
 			}
 			lem_in_links2(j, room_buf, splt);
 			break ;
@@ -90,8 +90,8 @@ void	lem_in_links(t_lem *j, int i, char **splt)
 
 void	lem_in_links2(t_lem *j, t_room *room_buf, char **splt)
 {
-	t_link *buf;
-	char *temp;
+	t_link	*buf;
+	char	*temp;
 
 	temp = splt[0];
 	splt[0] = splt[1];
@@ -101,14 +101,14 @@ void	lem_in_links2(t_lem *j, t_room *room_buf, char **splt)
 	{
 		if (ft_strequ(room_buf->name, splt[0]))
 		{
-				if ((buf = room_buf->link) == NULL)
-					room_buf->link = lem_in_make_link(j, room_buf, splt);
-				else
-				{
-					while (buf->next_link != NULL)
-						buf = buf->next_link;
-					buf->next_link = lem_in_make_link(j, room_buf, splt);
-				}
+			if ((buf = room_buf->link) == NULL)
+				room_buf->link = lem_in_make_link(j, room_buf, splt);
+			else
+			{
+				while (buf->next_link != NULL)
+					buf = buf->next_link;
+				buf->next_link = lem_in_make_link(j, room_buf, splt);
+			}
 			break ;
 		}
 		room_buf = room_buf->next_room;

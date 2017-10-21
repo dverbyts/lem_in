@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-int	main(void)
+int		main(void)
 {
 	t_lem	*j;
 
@@ -30,9 +30,8 @@ int	main(void)
 		ft_printf("ERROR\n");
 		return (0);
 	}
-	ft_printf("%s", j->input);
+	ft_putstr(j->input);
 	lem_in_go_ants(j, 0);
-	LEAK;
 	return (1);
 }
 
@@ -66,11 +65,15 @@ void	lem_in_read(t_lem *j)
 
 void	lem_in_save_input(t_lem *j, char *l, int i)
 {
+	char	*tmp;
+
 	while (l[i])
 	{
 		if (l[i] == '\n' && l[i + 1] == '\0')
 		{
+			tmp = j->input;
 			j->input = lem_in_strjoin(j->input, ft_strdup(l));
+			ft_strdel(&tmp);
 			return ;
 		}
 		i++;

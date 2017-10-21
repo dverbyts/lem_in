@@ -21,7 +21,7 @@ void	lem_in_go_ants(t_lem *j, int l)
 	lem_in_go_go_ants(j, l);
 }
 
-t_way 	*lem_in_revert_way(t_lem *j, int l)
+t_way	*lem_in_revert_way(t_lem *j, int l)
 {
 	t_way *prev;
 	t_way *current;
@@ -29,6 +29,7 @@ t_way 	*lem_in_revert_way(t_lem *j, int l)
 
 	prev = NULL;
 	current = j->way[l];
+	j->way[l] = NULL;
 	while (current != NULL)
 	{
 		next = current->next_step;
@@ -53,11 +54,15 @@ void	lem_in_go_go_ants(t_lem *j, int l)
 			if (buf->next_step->room->ant > -1 && buf->room->ant < j->ants)
 			{
 				buf->room->ant += 1;
-				ft_printf("L%d-%s ", buf->room->ant + 1, buf->room->name);
+				write(1, "L", 1);
+				ft_putnbr(1 + buf->room->ant);
+				write(1, "-", 1);
+				ft_putstr(buf->room->name);
+				write(1, " ", 1);
 			}
 			buf = buf->next_step;
 		}
-		ft_printf("\n");
+		write(1, "\n", 1);
 	}
 }
 
