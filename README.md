@@ -13,3 +13,5 @@ look at your design before before the game starts.
 Because arts and crafts with boxes, tape and ropes are not our greatest strength, we will
 create a digital version instead.
 The goal of this project is to create an “Hex” simulator.
+
+More info here https://github.com/dverbyts/lem_in/blob/master/lem-in.en.pdf
